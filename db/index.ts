@@ -17,7 +17,7 @@ export async function connectToDB() {
   // add the collections to the collections object
   collections.confessions = db.collection(process.env.MONGODB_COLLECTION_NAME);
   // Log successful connection to the database collection
-  console.log(`Successfully connected to database: ${db.databaseName} and collections: ${collections}`);
+  console.log(`Successfully connected to database`);
 }
 
 
