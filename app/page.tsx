@@ -5,7 +5,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <h1>CONFESSIONS</h1>
+      <h1 className="header">CONFESSIONS</h1>
       <Confessions />
     </main>
   );
