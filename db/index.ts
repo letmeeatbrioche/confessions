@@ -9,13 +9,13 @@ export const collections: { confessions?: mongoDB.Collection } = {};
 // export the function to connect to the database
 export async function connectToDB() {
   // create a new client
-  const client: mongoDB.MongoClient = new mongoDB.MongoClient(process.env.MONGODB_URI);
+  const client: mongoDB.MongoClient = new mongoDB.MongoClient(process.env.MONGODB_URI ? process.env.MONGODB_URI : 'mongodb://localhost:27017');
   // connect to the client
   await client.connect();
   // get the database
   const db: mongoDB.Db = client.db(process.env.MONGODB_DB_NAME);
   // add the collections to the collections object
-  collections.confessions = db.collection(process.env.MONGODB_COLLECTION_NAME);
+  collections.confessions = db.collection(process.env.MONGODB_COLLECTION_NAME ? process.env.MONGODB_COLLECTION_NAME : '');
   // Log successful connection to the database collection
   console.log(`Successfully connected to database`);
 }
