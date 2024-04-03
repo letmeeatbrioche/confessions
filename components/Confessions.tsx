@@ -8,7 +8,7 @@ type Props = {}
 const Confessions = (props: Props) => {
   const [text, setText] = useState<string>('');
   const [submitted, setSubmitted] = useState<boolean>(false);
-  const [confessions, setConfessions] = useState<[] | Confession>([]);
+  const [confessions, setConfessions] = useState<[]>([]);
   const [textLengthColor, setTextLengthColor] = useState('black');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,7 +82,7 @@ const Confessions = (props: Props) => {
       <div className="grid-container">
           {confessions.map((confession: Confession) => {
             return (
-              <div className="grid-item" key={confession._id}>
+              <div className="grid-item" key={confession._id?.toString()}>
                 <p>{confession.text}</p>
               </div>
             );
