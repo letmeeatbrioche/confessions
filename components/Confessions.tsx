@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { Confession } from '@/db/models'
-import { Box, Grid, Paper, TextField } from '@mui/material'
+import { Box, Button, TextField } from '@mui/material'
 
 type Props = {}
 
@@ -9,12 +9,23 @@ const Confessions = (props: Props) => {
   const [text, setText] = useState<string>('');
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [confessions, setConfessions] = useState<[] | Confession>([]);
+  const [textLengthColor, setTextLengthColor] = useState('black');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
+
+    if (text.length > 150) {
+      setTextLengthColor('red');
+    } else if (textLengthColor === 'red' && text.length <= 150) {
+      setTextLengthColor('black');
+    }
   }
 
   const handleSubmit = async () => {
+    if (text.length > 150) {
+      alert('Confession too long. Please keep it 150 characters and under.');
+      return;
+    }
     console.log('Submitting confession:', text);
     try {
       const res = await fetch("http://localhost:3000/api/", {
@@ -38,6 +49,15 @@ const Confessions = (props: Props) => {
     getConfessions();
   }, [submitted]);
 
+  useEffect(() => {
+    if (text.length > 150) {
+      setTextLengthColor('red');
+    } else if (textLengthColor === 'red' && text.length <= 150) {
+      setTextLengthColor('black');
+    }
+  }, [textLengthColor, text.length])
+
+
   const getConfessions = async () => {
     const res = await fetch("http://localhost:3000/api/");
     const confessions = await res.json();
@@ -48,29 +68,26 @@ const Confessions = (props: Props) => {
 
   return (
     <>
-    <Box className='form-container'>
-      <TextField multiline maxRows={4} style={{width: '100%'}} helperText="Submit a confession" label='Confess something'>
-        <input className='input' type='text' placeholder='Confess something' value={text} onChange={handleChange} />
+      <Box className='form-container'>
+
+      <TextField multiline maxRows={4} style={{width: '100%'}} helperText="Submit a confession" label='Confess something' value={text} onChange={handleChange}>
       </TextField>
-      <p>Character limit: 200</p>
-      <button onClick={() => handleSubmit()}>Submit</button>
-    </Box>
+
+      <p>Character limit: <span style={{color: textLengthColor}}>{text.length}</span>/150</p>
+
+      <Button variant='contained' className='submit-button' onClick={() => handleSubmit()}>Submit</Button>
+        </Box>
 
 
-      <Grid container className='confessions-container' rowSpacing={3} columnSpacing={3} style={{width: '70%', margin: '50px auto', alignItems: 'center'}}>
+      <div className="grid-container">
           {confessions.map((confession: Confession) => {
             return (
-              // xs={12} sm={6} md={4} lg={3}
-              <Grid item xs={12} sm={6} md={4} key={confession._id} style={{alignSelf: 'stretch'}}>
-                <Paper className='paper' elevation={3} key={confession._id}>
-                  <div className='container horizontal confessions-item' key={confession._id}>
-                    <p className='child'>{confession.text}</p>
-                  </div>
-                </Paper>
-              </Grid>
+              <div className="grid-item" key={confession._id}>
+                <p>{confession.text}</p>
+              </div>
             );
           })}
-      </Grid>
+      </div>
     </>
   )
 }
