@@ -5,7 +5,8 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <h1 className="header">CONFESSIONS</h1>
+      <h1 className="header-1">CONFíT</h1>
+      {/* <h2 className="header-2">CONFESSIONS</h2> */}
       <Confessions />
     </main>
   );
