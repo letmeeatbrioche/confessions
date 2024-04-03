@@ -1,19 +1,35 @@
+
 .body {
   font-size: 1em;
 }
 
-.header {
+.header-1 {
+  font-size: 3em;
   text-align: center;
   margin: 3.5rem auto 4rem auto;
+  color: rgba(20, 13, 79, 1);
 }
+/* .header-2 {
+  font-size: 1.4em;
+  text-align: center;
+  margin: 0 auto 4rem auto;
+  color: rgba(20, 13, 79, 0.75);
+} */
 
 .form-container {
   width: 50%;
   margin: 0 auto;
+  font-weight: 450;
 }
 
 .submit-button {
   width: 100%;
+  background-color: rgba(167, 195, 255, 1);
+  color: #140D4F;
+}
+.submit-button span {
+  font-weight: 600;
+  letter-spacing: 0.1em;
 }
 
 .grid-container {
@@ -29,12 +45,13 @@
   display: flex; /* Use flexbox */
   justify-content: center; /* Center content horizontally */
   align-items: center; /* Center content vertically */
-  background-color: #f0f0f0;
+  background-color: rgba(167, 195, 255, 0.3);
   padding: 20px;
   text-align: center;
   word-break: break-all;
-  background-color: rgb(255, 255, 255);
-  color: rgba(0, 0, 0, 0.87);
+  /* background-color: rgb(255, 255, 255); */
+  color: rgba(0, 0, 0, 0.75);
+  font-weight: 500;
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
   /* transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; */
@@ -45,7 +62,7 @@
   /* font-weight: 400; */
   /* font-size: 0.875rem; */
   /* line-height: 1.43; */
-  /* letter-spacing: 0.01071em; */
+  letter-spacing: 0.01071em;
   /* text-align: center; */
 }
 
