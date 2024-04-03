@@ -75,7 +75,7 @@ const Confessions = (props: Props) => {
 
       <p>Character limit: <span style={{color: textLengthColor}}>{text.length}</span>/150</p>
 
-      <Button variant='contained' className='submit-button' onClick={() => handleSubmit()}>Submit</Button>
+      <Button variant='contained' className='submit-button' onClick={() => handleSubmit()}><span>Submit</span></Button>
         </Box>
 
 
