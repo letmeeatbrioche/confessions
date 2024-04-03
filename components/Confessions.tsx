@@ -28,7 +28,7 @@ const Confessions = (props: Props) => {
     }
     console.log('Submitting confession:', text);
     try {
-      const res = await fetch("http://localhost:3000/api/", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -59,7 +59,7 @@ const Confessions = (props: Props) => {
 
 
   const getConfessions = async () => {
-    const res = await fetch("http://localhost:3000/api/");
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/`);
     const confessions = await res.json();
     console.log('confessions:', confessions);
     setConfessions(confessions.reverse());
