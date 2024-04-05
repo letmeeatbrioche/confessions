@@ -62,7 +62,7 @@ const Confessions = (props: Props) => {
   const getConfessions = async () => {
     try {
       // const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/`);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/`, {
+      const res = await fetch(`http://localhost:3000/api/`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -74,7 +74,7 @@ const Confessions = (props: Props) => {
       console.log('confessions:', confessions);
       setConfessions(confessions.reverse());
     } catch (error) {
-      console.error("Error posting confession from home page:", error);
+      console.error("Error getting confessions:", error);
     }
     return confessions;
   }
