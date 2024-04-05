@@ -14,30 +14,30 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// export async function GET() {
-//   try {
-//     await connectToDB();
-//     const confessions = await collections.confessions?.find().toArray();
-//     return NextResponse.json(confessions);
-//   } catch (error) {
-//     console.log('Problem with GET request:', error);
-//   }
-// }
-
 export async function GET() {
-  const confessions = [
-    {
-        "_id": "660db75fe4fcb779b21713ab",
-        "text": "I like to go, \"Weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee!\""
-    },
-    {
-        "_id": "660dc485c39a48c6e749197f",
-        "text": "I have a paper"
-    }
-  ];
   try {
+    await connectToDB();
+    const confessions = await collections.confessions?.find().toArray();
     return NextResponse.json(confessions);
   } catch (error) {
     console.log('Problem with GET request:', error);
   }
 }
+
+// export async function GET() {
+//   const confessions = [
+//     {
+//         "_id": "660db75fe4fcb779b21713ab",
+//         "text": "I like to go, \"Weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee!\""
+//     },
+//     {
+//         "_id": "660dc485c39a48c6e749197f",
+//         "text": "I have a paper"
+//     }
+//   ];
+//   try {
+//     return NextResponse.json(confessions);
+//   } catch (error) {
+//     console.log('Problem with GET request:', error);
+//   }
+// }
