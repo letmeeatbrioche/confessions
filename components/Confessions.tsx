@@ -36,6 +36,7 @@ const Confessions = (props: Props) => {
         cache: "no-store",
         body: JSON.stringify({ text }),
       })
+      console.log('handleSubmit res:', res);
       console.log('Successfully uploaded confession!: ', text);
       setSubmitted(!submitted);
       setText('');
@@ -59,10 +60,22 @@ const Confessions = (props: Props) => {
 
 
   const getConfessions = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/`);
-    const confessions = await res.json();
-    console.log('confessions:', confessions);
-    setConfessions(confessions.reverse());
+    try {
+      // const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "no-store",
+      })
+      console.log('getConfessions res:', res);
+      const confessions = await res.json();
+      console.log('confessions:', confessions);
+      setConfessions(confessions.reverse());
+    } catch (error) {
+      console.error("Error posting confession from home page:", error);
+    }
     return confessions;
   }
 
