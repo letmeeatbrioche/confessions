@@ -79,26 +79,40 @@ const Confessions = (props: Props) => {
   //   return confessions;
   // }
 
-  const getConfessions = async () => {
-    try {
-      const res = await fetch(`http://localhost:3000/api/`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        cache: "no-store",
-      })
-      console.log('getConfessions res:', res);
-      const confessions = await res.json();
-      console.log('confessions:', confessions);
-      setConfessions(confessions.reverse());
-    } catch (error) {
-      console.error("Error getting confessions:", error);
-    }
-    return confessions;
-  }
+  // const getConfessions = async () => {
+  //   try {
+  //     const res = await fetch(`http://localhost:3000/api/`, {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       cache: "no-store",
+  //     })
+  //     console.log('getConfessions res:', res);
+  //     const confessions = await res.json();
+  //     console.log('confessions:', confessions);
+  //     setConfessions(confessions.reverse());
+  //   } catch (error) {
+  //     console.error("Error getting confessions:", error);
+  //   }
+  //   return confessions;
+  // }
 
-  getConfessions();
+  // getConfessions();
+
+  const res = fetch(`http://localhost:3000/api/`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    cache: "no-store",
+  })
+  .then(res => res.json())
+  .then(resJSON => {
+    console.log('resJSON:', resJSON);
+    setConfessions(resJSON.reverse());
+  })
+  .catch(error => console.error("Error getting confessions:", error))
 
   return (
     <>
