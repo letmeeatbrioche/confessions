@@ -11,57 +11,76 @@ const Confessions = (props: Props) => {
   const [confessions, setConfessions] = useState<[]>([]);
   const [textLengthColor, setTextLengthColor] = useState('black');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setText(e.target.value);
 
-    if (text.length > 150) {
-      setTextLengthColor('red');
-    } else if (textLengthColor === 'red' && text.length <= 150) {
-      setTextLengthColor('black');
-    }
-  }
+  //   if (text.length > 150) {
+  //     setTextLengthColor('red');
+  //   } else if (textLengthColor === 'red' && text.length <= 150) {
+  //     setTextLengthColor('black');
+  //   }
+  // }
 
-  const handleSubmit = async () => {
-    if (text.length > 150) {
-      alert('Confession too long. Please keep it 150 characters and under.');
-      return;
-    }
-    console.log('Submitting confession:', text);
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        cache: "no-store",
-        body: JSON.stringify({ text }),
-      })
-      console.log('handleSubmit res:', res);
-      console.log('Successfully uploaded confession!: ', text);
-      setSubmitted(!submitted);
-      setText('');
-    } catch (error) {
-      console.error("Error posting confession from home page:", error);
-    }
-  }
+  // const handleSubmit = async () => {
+  //   if (text.length > 150) {
+  //     alert('Confession too long. Please keep it 150 characters and under.');
+  //     return;
+  //   }
+  //   console.log('Submitting confession:', text);
+  //   try {
+  //     const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       cache: "no-store",
+  //       body: JSON.stringify({ text }),
+  //     })
+  //     console.log('handleSubmit res:', res);
+  //     console.log('Successfully uploaded confession!: ', text);
+  //     setSubmitted(!submitted);
+  //     setText('');
+  //   } catch (error) {
+  //     console.error("Error posting confession from home page:", error);
+  //   }
+  // }
 
-  useEffect(() => {
-    console.log('getting confessions in useEffect');
-    getConfessions();
-  }, [submitted]);
+  // useEffect(() => {
+  //   console.log('getting confessions in useEffect');
+  //   getConfessions();
+  // }, [submitted]);
 
-  useEffect(() => {
-    if (text.length > 150) {
-      setTextLengthColor('red');
-    } else if (textLengthColor === 'red' && text.length <= 150) {
-      setTextLengthColor('black');
-    }
-  }, [textLengthColor, text.length])
+  // useEffect(() => {
+  //   if (text.length > 150) {
+  //     setTextLengthColor('red');
+  //   } else if (textLengthColor === 'red' && text.length <= 150) {
+  //     setTextLengthColor('black');
+  //   }
+  // }, [textLengthColor, text.length])
 
+
+  // const getConfessions = async () => {
+  //   try {
+  //     // const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/`);
+  //     const res = await fetch(`http://localhost:3000/api/`, {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       cache: "no-store",
+  //     })
+  //     console.log('getConfessions res:', res);
+  //     const confessions = await res.json();
+  //     console.log('confessions:', confessions);
+  //     setConfessions(confessions.reverse());
+  //   } catch (error) {
+  //     console.error("Error getting confessions:", error);
+  //   }
+  //   return confessions;
+  // }
 
   const getConfessions = async () => {
     try {
-      // const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/`);
       const res = await fetch(`http://localhost:3000/api/`, {
         method: "GET",
         headers: {
@@ -79,9 +98,11 @@ const Confessions = (props: Props) => {
     return confessions;
   }
 
+  getConfessions();
+
   return (
     <>
-      <Box className='form-container'>
+      {/* <Box className='form-container'>
 
       <TextField multiline maxRows={4} style={{width: '100%'}} helperText="Submit a confession" label='Confess something' value={text} onChange={handleChange}>
       </TextField>
@@ -89,7 +110,7 @@ const Confessions = (props: Props) => {
       <p>Character limit: <span style={{color: textLengthColor}}>{text.length}</span>/150</p>
 
       <Button variant='contained' className='submit-button' onClick={() => handleSubmit()}><span>Submit</span></Button>
-        </Box>
+        </Box> */}
 
 
       <div className="grid-container">

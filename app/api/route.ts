@@ -14,11 +14,19 @@ export async function POST(req: NextRequest) {
   }
 }
 
+// export async function GET() {
+//   try {
+//     await connectToDB();
+//     const confessions = await collections.confessions?.find().toArray();
+//     return NextResponse.json(confessions);
+//   } catch (error) {
+//     console.log('Problem with GET request:', error);
+//   }
+// }
+
 export async function GET() {
   try {
-    await connectToDB();
-    const confessions = await collections.confessions?.find().toArray();
-    return NextResponse.json(confessions);
+    return NextResponse.json({test: 'test'});
   } catch (error) {
     console.log('Problem with GET request:', error);
   }
