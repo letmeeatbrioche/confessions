@@ -63,7 +63,7 @@ const Confessions = (props: Props) => {
     try {
       // const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/`);
       const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/`, {
-        method: "POST",
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
