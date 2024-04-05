@@ -34,7 +34,7 @@ export async function GET() {
         "_id": "660dc485c39a48c6e749197f",
         "text": "I have a paper"
     }
-];
+  ];
   try {
     return NextResponse.json(confessions);
   } catch (error) {

@@ -102,12 +102,12 @@ const Confessions = (props: Props) => {
 
   const res = fetch(`http://localhost:3000/api/`, {
     method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
     cache: "no-store",
   })
-  .then(res => res.json())
+  .then(res => {
+    console.log('res:', res);
+    return res.json();
+  })
   .then(resJSON => {
     console.log('resJSON:', resJSON);
     setConfessions(resJSON.reverse());
