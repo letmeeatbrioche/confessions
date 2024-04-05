@@ -100,7 +100,7 @@ const Confessions = (props: Props) => {
 
   // getConfessions();
 
-  const res = fetch(`http://localhost:3000/api/`, {
+  const res = fetch(`../api/`, {
     method: "GET",
     cache: "no-store",
   })
