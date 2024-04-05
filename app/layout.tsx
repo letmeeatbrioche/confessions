@@ -6,7 +6,10 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "CONFíT",
-  description: "Confess anonymously and read others' confessions",
+  description: "Confess you heart anonymously",
+  icons: {
+    icon: '/icon.png',
+  }
 };
 
 export default function RootLayout({
