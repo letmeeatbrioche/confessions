@@ -31,6 +31,10 @@
   font-weight: 600;
   letter-spacing: 0.1em;
 }
+.submit-button:hover {
+  background-color: #1565c0;
+  color: rgb(246, 249, 255);
+}
 
 .grid-container {
   display: grid;
@@ -68,6 +72,17 @@
 
 .grid-item p {
   margin: 0; /* Remove default margin */
+}
+
+footer {
+  text-align: center;
+  font-size: 0.8rem;
+  margin-top: 9rem;
+  color: rgba(20, 13, 79, 0.75);
+}
+
+.disclaimer {
+  font-style: italic;
 }
 
 /* MEDIA QUERIES */
