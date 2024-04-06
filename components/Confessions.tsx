@@ -26,6 +26,10 @@ const Confessions = (props: Props) => {
       alert('Confession too long. Please keep it 150 characters and under.');
       return;
     }
+    if (text.length === 0) {
+      alert('Confession cannot be blank.');
+      return;
+    }
     console.log('Submitting confession:', text);
     try {
       const res = await fetch(`../api/`, {
