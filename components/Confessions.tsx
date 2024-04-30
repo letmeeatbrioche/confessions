@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import { Confession } from '@/db/models'
 import { Box, Button, TextField } from '@mui/material'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 type Props = {}
 
@@ -21,13 +23,22 @@ const Confessions = (props: Props) => {
     }
   }
 
+  const notify = (message: string) => toast(message, {
+    position: "top-center",
+    autoClose: 5000,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    style: { backgroundColor: '#db5246', color: '#fff' }
+  });
+
   const handleSubmit = async () => {
     if (text.length > 150) {
-      alert('Confession too long. Please keep it 150 characters and under.');
+      notify('Confession too long. Please keep it 150 characters and under!');
       return;
     }
     if (text.length === 0) {
-      alert('Confession cannot be blank.');
+      notify('Confession cannot be blank!');
       return;
     }
     console.log('Submitting confession:', text);
@@ -52,6 +63,7 @@ const Confessions = (props: Props) => {
   useEffect(() => {
     console.log('getting confessions in useEffect');
     getConfessions();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [submitted]);
 
   useEffect(() => {
@@ -65,7 +77,6 @@ const Confessions = (props: Props) => {
 
   const getConfessions = async () => {
     try {
-      // const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/`);
       const res = await fetch(`../api/`, {
         method: "GET",
         headers: {
@@ -87,13 +98,14 @@ const Confessions = (props: Props) => {
     <>
       <Box className='form-container'>
 
-      <TextField multiline maxRows={4} style={{width: '100%'}} helperText="Submit a confession" label='Confess something' value={text} onChange={handleChange}>
-      </TextField>
+        <TextField multiline maxRows={5} style={{width: '100%'}} helperText="Submit a confession" label='Confess something' value={text} onChange={handleChange}>
+        </TextField>
 
-      <p>Character limit: <span style={{color: textLengthColor}}>{text.length}</span>/150</p>
+        <p>Character limit: <span style={{color: textLengthColor}}>{text.length}</span>/150</p>
 
-      <Button variant='contained' className='submit-button' onClick={() => handleSubmit()}><span>Submit</span></Button>
-        </Box>
+        <Button variant='contained' className='submit-button' onClick={handleSubmit}><span>Submit</span></Button>
+        <ToastContainer />
+      </Box>
 
 
       <div className="grid-container">
