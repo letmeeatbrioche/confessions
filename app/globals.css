@@ -26,14 +26,28 @@
   width: 100%;
   background-color: rgba(167, 195, 255, 1);
   color: #140D4F;
+  margin-bottom: 2rem;
 }
 .submit-button span {
-  font-weight: 600;
   letter-spacing: 0.1em;
 }
 .submit-button:hover {
   background-color: #1565c0;
   color: rgb(246, 249, 255);
+}
+
+.refresh-button {
+  width: 40%;
+  background-color: #1565c0;
+  margin: 0 auto;
+  display: block;
+}
+.refresh-button span {
+  letter-spacing: 0.1em;
+}
+.refresh-button:hover {
+  background-color: rgba(167, 195, 255, 1);
+  color: #140D4F;
 }
 
 .grid-container {
