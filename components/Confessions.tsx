@@ -60,6 +60,14 @@ const Confessions = (props: Props) => {
     }
   }
 
+  const shuffle = (confessions: string[]) => {
+    for (let i = confessions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [confessions[i], confessions[j]] = [confessions[j], confessions[i]];
+    }
+    return confessions;
+  };
+
   useEffect(() => {
     console.log('getting confessions in useEffect');
     getConfessions();
@@ -76,6 +84,7 @@ const Confessions = (props: Props) => {
 
 
   const getConfessions = async () => {
+    console.log('getting confessions...');
     try {
       const res = await fetch(`../api/`, {
         method: "GET",
@@ -87,7 +96,8 @@ const Confessions = (props: Props) => {
       console.log('getConfessions res:', res);
       const confessions = await res.json();
       console.log('confessions:', confessions);
-      setConfessions(confessions.reverse());
+      const shuffledConfessions = shuffle(confessions);
+      setConfessions(shuffledConfessions);
     } catch (error) {
       console.error("Error getting confessions:", error);
     }
@@ -104,6 +114,9 @@ const Confessions = (props: Props) => {
         <p>Character limit: <span style={{color: textLengthColor}}>{text.length}</span>/150</p>
 
         <Button variant='contained' className='submit-button' onClick={handleSubmit}><span>Submit</span></Button>
+
+        <Button variant='contained' className='refresh-button' onClick={getConfessions}><span>Refresh</span></Button>
+
         <ToastContainer />
       </Box>
 
