@@ -115,7 +115,7 @@ const Confessions = (props: Props) => {
 
         <Button variant='contained' className='submit-button' onClick={handleSubmit}><span>Submit</span></Button>
 
-        <Button variant='contained' className='refresh-button' onClick={getConfessions}><span>Shuffle</span></Button>
+        <Button variant='contained' className='shuffle-button' onClick={getConfessions}><span>Shuffle</span></Button>
 
         <ToastContainer />
       </Box>

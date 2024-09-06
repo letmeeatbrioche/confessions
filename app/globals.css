@@ -36,16 +36,16 @@
   color: rgb(246, 249, 255);
 }
 
-.refresh-button {
+.shuffle-button {
   width: 40%;
   background-color: #1565c0;
   margin: 0 auto;
   display: block;
 }
-.refresh-button span {
+.shuffle-button span {
   letter-spacing: 0.1em;
 }
-.refresh-button:hover {
+.shuffle-button:hover {
   background-color: rgba(167, 195, 255, 1);
   color: #140D4F;
 }
