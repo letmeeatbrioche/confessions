@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, {SetStateAction, useEffect, useState } from 'react'
 import { Confession } from '@/db/models'
 import { Box, Button, TextField } from '@mui/material'
 import { ToastContainer, toast } from 'react-toastify'
@@ -60,7 +60,7 @@ const Confessions = (props: Props) => {
     }
   }
 
-  const shuffle = (confessions: string[]) => {
+  const shuffle = (confessions: object[]) => {
     for (let i = confessions.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [confessions[i], confessions[j]] = [confessions[j], confessions[i]];
@@ -97,7 +97,7 @@ const Confessions = (props: Props) => {
       const confessions = await res.json();
       console.log('confessions:', confessions);
       const shuffledConfessions = shuffle(confessions);
-      setConfessions(shuffledConfessions);
+      setConfessions(shuffledConfessions as SetStateAction<[]>);
     } catch (error) {
       console.error("Error getting confessions:", error);
     }
