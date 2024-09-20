@@ -6,8 +6,8 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <h1 className="header-1">CONFíT<sup>9</sup></h1>
-      {/* <h2 className="header-2">CONFESSIONS</h2> */}
+      <h1 className="header">CONFíT<sup>9</sup></h1>
+      <h2 className="subheading">What&apos;s on your mind?</h2>
       <Confessions />
       <Footer />
     </main>
