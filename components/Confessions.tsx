@@ -108,7 +108,7 @@ const Confessions = (props: Props) => {
     <>
       <Box className='form-container'>
 
-        <TextField multiline maxRows={5} style={{width: '100%'}} helperText="Submit a confession" label='Confess something' value={text} onChange={handleChange}>
+        <TextField multiline maxRows={5} style={{width: '100%'}} helperText="Put something in the ether." label='Your words are valuable...' value={text} onChange={handleChange}>
         </TextField>
 
         <p>Character limit: <span style={{color: textLengthColor}}>{text.length}</span>/150</p>
