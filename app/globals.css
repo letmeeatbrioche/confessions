@@ -7,6 +7,7 @@
   font-size: 3em;
   text-align: center;
   margin: 3.5rem auto 3rem auto;
+  /* margin: 3.5rem auto 0 auto; */
   color: rgba(20, 13, 79, 1);
   font-weight: 300;
 }
@@ -16,7 +17,22 @@
   text-align: center;
   margin: 0 auto 4rem auto;
   color: rgba(20, 13, 79, 0.75);
+  /* position: relative; */
+  /* translate: 0px 1.4em; */
+  /* height: 1.5rem; */
 }
+
+/* .text-mask {
+  display: block;
+  height: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.text-container {
+  position: relative;
+  transition: transform 0.5s ease;
+} */
 
 .form-container {
   width: 50%;
