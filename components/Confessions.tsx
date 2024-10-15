@@ -9,9 +9,12 @@ type Props = {}
 
 const Confessions = (props: Props) => {
   const [text, setText] = useState<string>('');
-  const [submitted, setSubmitted] = useState<boolean>(false);
+  const [submitted, setSubmitted] = useState<number>(0);
   const [confessions, setConfessions] = useState<[]>([]);
-  const [textLengthColor, setTextLengthColor] = useState('black');
+  const [textLengthColor, setTextLengthColor] = useState<string>('black');
+  const [pseudoText, setPseudoText] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
@@ -41,7 +44,7 @@ const Confessions = (props: Props) => {
       notify('Confession cannot be blank!');
       return;
     }
-    console.log('Submitting confession:', text);
+    setPseudoText(text);
     try {
       const res = await fetch(`../api/`, {
         method: "POST",
@@ -51,14 +54,17 @@ const Confessions = (props: Props) => {
         cache: "no-store",
         body: JSON.stringify({ text }),
       })
-      console.log('handleSubmit res:', res);
-      console.log('Successfully uploaded confession!: ', text);
-      setSubmitted(!submitted);
+      setSubmitted(submitted + 1);
       setText('');
     } catch (error) {
       console.error("Error posting confession from home page:", error);
     }
   }
+
+  // POSSIBLE ITERATION:
+  // Set a state array for pseudo-confessions objects
+  // Modify the getConfessions function to add the pseudo-confession object to the pseudo-confessions state array
+  // Modify the shuffle function to reset the pseudo-confessions state array
 
   const shuffle = (confessions: object[]) => {
     for (let i = confessions.length - 1; i > 0; i--) {
@@ -69,9 +75,9 @@ const Confessions = (props: Props) => {
   };
 
   useEffect(() => {
-    console.log('getting confessions in useEffect');
+    console.log('getting confessions in useEffect based on SUBMITTED');
     getConfessions();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [submitted]);
 
   useEffect(() => {
@@ -83,8 +89,8 @@ const Confessions = (props: Props) => {
   }, [textLengthColor, text.length])
 
 
-  const getConfessions = async () => {
-    console.log('getting confessions...');
+  const getConfessions = async (justShuffling?: boolean) => {
+    // console.log('getting confessions...');
     try {
       const res = await fetch(`../api/`, {
         method: "GET",
@@ -93,11 +99,26 @@ const Confessions = (props: Props) => {
         },
         cache: "no-store",
       })
-      console.log('getConfessions res:', res);
+      // console.log('getConfessions res:', res);
       const confessions = await res.json();
-      console.log('confessions:', confessions);
-      const shuffledConfessions = shuffle(confessions);
-      setConfessions(shuffledConfessions as SetStateAction<[]>);
+
+      if (submitted > 0) {
+        let newConfessionCollection: object[] = [];
+
+        if (!justShuffling) {
+          const newConfession = {
+            _id: submitted,
+            text: pseudoText
+          };
+          newConfessionCollection.push(newConfession);
+        }
+
+        const newConfessions = [...newConfessionCollection, ...shuffle(confessions)];
+        setConfessions(newConfessions as SetStateAction<[]>);
+      } else {
+        const shuffledConfessions = shuffle(confessions);
+        setConfessions(shuffledConfessions as SetStateAction<[]>);
+      }
     } catch (error) {
       console.error("Error getting confessions:", error);
     }
@@ -115,7 +136,7 @@ const Confessions = (props: Props) => {
 
         <Button variant='contained' className='submit-button' onClick={handleSubmit}><span>Submit</span></Button>
 
-        <Button variant='contained' className='shuffle-button' onClick={getConfessions}><span>Shuffle</span></Button>
+        <Button variant='contained' className='shuffle-button' onClick={() => getConfessions(true)}><span>Shuffle</span></Button>
 
         <ToastContainer />
       </Box>
